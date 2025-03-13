@@ -89,9 +89,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                             decoration: BoxDecoration(
                                 boxShadow: [
                               BoxShadow(
-                                blurRadius: 12,
+                                blurRadius: 10,
                                 color: Colors.black,
-                                offset: Offset(0, 10)
+                                offset: Offset(0, 8)
                               )
                             ],
                               borderRadius: BorderRadius.circular(100),
@@ -114,7 +114,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("اللغة العربية كما يجب أن تكون" , style: GoogleFonts.blaka(color:ConstAppColors.mainTextColor, fontSize: 40 , shadows: [
+                      Text("اللغة العربية كما يجب أن تكون" , 
+                      style: GoogleFonts.blaka(color:ConstAppColors.mainTextColor, fontSize: 40 , shadows: [
                         Shadow(
                           blurRadius: 10,
                                 color: Colors.black,
