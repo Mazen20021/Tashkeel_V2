@@ -82,20 +82,66 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Image.asset(
-                    'assets/image/logo.png', // Replace with your logo asset path
+                  Stack(children: [
+                    Container(
+                            width: 200,
+                            height: 200,
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                              BoxShadow(
+                                blurRadius: 12,
+                                color: Colors.black,
+                                offset: Offset(0, 10)
+                              )
+                            ],
+                              borderRadius: BorderRadius.circular(100),
+                              gradient: LinearGradient(colors:  [
+                                ConstAppColors.cardMainColor,
+                                ConstAppColors.cardBackColor
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight
+                              ),
+                            ),
+                          ),
+                    Image.asset(
+                    'assets/image/logo v2.png', // Replace with your logo asset path
                     width: 200, // Adjust the width as needed
                     height: 200, // Adjust the height as needed
                   ),
+                  ],),
                   const SizedBox(height: 20),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("اللغة العربية كما يجب أن تكون" , style: GoogleFonts.blaka(color:ConstAppColors.mainTextColor, fontSize: 40),),
-                      LoadingAnimationWidget.staggeredDotsWave(
-                        color: ConstAppColors.mainTextColor,
-                         size: 40,
+                      Text("اللغة العربية كما يجب أن تكون" , style: GoogleFonts.blaka(color:ConstAppColors.mainTextColor, fontSize: 40 , shadows: [
+                        Shadow(
+                          blurRadius: 10,
+                                color: Colors.black,
+                                offset: Offset(0, 8)
                         )
+                      ]),),
+                      Stack(
+                        children: [
+                          // Shadow layer (slightly offset and blurred)
+                          Positioned(
+                            top: 5, // Offset to simulate shadow
+                            left: 2,
+                            child: Opacity(
+                              opacity: 0.6, // Adjust opacity for a subtle shadow effect
+                              child: LoadingAnimationWidget.staggeredDotsWave(
+                                color: Colors.black, // Shadow color
+                                size: 40,
+                              ),
+                            ),
+                          ),
+                          // Main animation
+                          LoadingAnimationWidget.staggeredDotsWave(
+                            color: ConstAppColors.mainTextColor,
+                            size: 40,
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ],
