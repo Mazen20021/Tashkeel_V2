@@ -8,3 +8,4 @@ class ShowTab extends AppStates{}
 class ChooseTashkeel extends AppStates{}
 class ChooseTranslate extends AppStates{}
 class ChooseSettings extends AppStates{}
+class CheckServerStatus extends AppStates{}

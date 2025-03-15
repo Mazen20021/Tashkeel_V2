@@ -86,6 +86,7 @@ class MainPage extends StatelessWidget {
                           ),
                           child: TextFormField(
                             controller: appParams.userInputText,
+                            enabled:  !appParams.isServerLoading,
                             style: GoogleFonts.mada(
                               color: Colors.black,
                               fontSize: 25,
@@ -128,7 +129,38 @@ class MainPage extends StatelessWidget {
                               children: [
                                 Container(
                                   padding: const EdgeInsets.all(8.0),
-                                  child:GestureDetector(
+                                  child:
+                                  appParams.isServerLoading ? 
+                                  GestureDetector(
+                                    onTap: () { },
+                                    child:TextFormField(
+                                      enabled: false,
+                                      style: GoogleFonts.mada(
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                      ),
+                                      controller:appParams.serverOutputText,
+                                      textDirection: TextDirection.rtl,
+                                      decoration: InputDecoration(
+                                        hintStyle: GoogleFonts.mada(
+                                          color: Colors.black,
+                                          fontSize: 25,
+                                        ),
+                                      hintText: appParams.isServerLoading ? '' : 'التشكيل', // Ensure hintText is always a String
+                                      suffixIcon: appParams.isServerLoading 
+                                          ? LoadingAnimationWidget.staggeredDotsWave(
+                                              color: Colors.black,
+                                              size: 40,
+                                            ) 
+                                          : null, // Show the loading animation as suffix
+                                        border: InputBorder.none,
+                                        hintTextDirection: TextDirection.rtl,
+                                      ),
+                                      textAlignVertical: TextAlignVertical.top,
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: null,
+                                    ),)
+                                  : GestureDetector(
                                     onTap: () {
                                       Clipboard.setData(ClipboardData(text: appParams.serverOutputText.text)).then((_) {
                                         ScaffoldMessenger.of(context).showSnackBar(
@@ -144,7 +176,8 @@ class MainPage extends StatelessWidget {
                                             ),
                                           ),
                                         );
-                                      });
+                                      }
+                                      );
                                     },
                                     child:TextFormField(
                                       enabled: false,
@@ -159,7 +192,13 @@ class MainPage extends StatelessWidget {
                                           color: Colors.black,
                                           fontSize: 25,
                                         ),
-                                        hintText: 'التشكيل',
+                                      hintText: appParams.isServerLoading ? '' : 'التشكيل', // Ensure hintText is always a String
+                                      suffixIcon: appParams.isServerLoading 
+                                          ? LoadingAnimationWidget.staggeredDotsWave(
+                                              color: Colors.black,
+                                              size: 40,
+                                            ) 
+                                          : null, // Show the loading animation as suffix
                                         border: InputBorder.none,
                                         hintTextDirection: TextDirection.rtl,
                                       ),
@@ -175,8 +214,11 @@ class MainPage extends StatelessWidget {
                       ),
                       Transform.translate(
                           offset: Offset(0, -390),
-                          child: GestureDetector(
-                            onTap: (){},
+                          child: appParams.isServerLoading ? 
+                            GestureDetector(
+                            onTap: (){
+                              appParams.checkServerStatus(context);
+                            },
                             child: Container(
                               width: 80,
                               height: 80,
@@ -184,7 +226,21 @@ class MainPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(100),
                                 color: ConstAppColors.backgroundDarkColor
                               ),
-                              child: Icon(Icons.check_circle_rounded , color: ConstAppColors.cardMainColor,size: 60,),
+                              child: Icon(Icons.cancel , color: const Color.fromARGB(255, 255, 104, 104),size: 60,),
+                            ),
+                          )
+                          : GestureDetector(
+                            onTap: (){
+                              appParams.checkServerStatus(context);
+                            },
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: ConstAppColors.backgroundDarkColor
+                              ),
+                              child: Icon(Icons.check_circle_rounded , color: const Color.fromARGB(255, 181, 255, 96),size: 60,),
                             ),
                           ),
                         ),
@@ -256,24 +312,87 @@ class MainPage extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              appParams.isServerLoading ? 
+                               GestureDetector(
+                                onTap: (){},
+                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: ConstAppColors.backgroundDarkColor
+                                  ),
+                                  child: Icon(Icons.signal_cellular_no_sim_rounded , color: Colors.redAccent , size: 35,)),
+                                ),
+                              ):
                               GestureDetector(
                                 onTap: (){},
                                 child: Padding(padding: EdgeInsets.all(10),
-                                child: Icon(Icons.file_present_rounded , color: ConstAppColors.backgroundDarkColor , size: 35,),
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: ConstAppColors.backgroundDarkColor
+                                  ),
+                                  child: Icon(Icons.file_present_rounded , color: Colors.redAccent , size: 35,)),
                                 ),
                               ),
                               Spacer(),
+                              appParams.isServerLoading ? 
                               GestureDetector(
                                 onTap: (){},
                                 child: Padding(padding: EdgeInsets.all(10),
-                                child: Icon(Icons.mic, color: ConstAppColors.backgroundDarkColor , size: 35,),
+                                child: Container(
+                                   width: 120,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(200),
+                                    color: ConstAppColors.backgroundDarkColor
+                                  ),
+                                  child: Icon(Icons.mic_off_rounded, color: const Color.fromARGB(255, 255, 255, 255)  , size: 35,)),
+                                ),
+                              )
+                              :GestureDetector(
+                                onTap: (){},
+                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Container(
+                                   width: 120,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(200),
+                                    color: ConstAppColors.backgroundDarkColor
+                                  ),
+                                  child: Icon(Icons.mic, color: const Color.fromARGB(255, 255, 255, 255)  , size: 35,)),
                                 ),
                               ),
                               Spacer(),
+                              appParams.isServerLoading ? 
                               GestureDetector(
                                 onTap: (){},
                                 child: Padding(padding: EdgeInsets.all(10),
-                                child: Icon(Icons.camera_alt_rounded, color: ConstAppColors.backgroundDarkColor , size: 35,),
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: ConstAppColors.backgroundDarkColor
+                                  ),
+                                  child: Icon(Icons.no_photography_rounded, color: ConstAppColors.mainTextColor , size: 38,)),
+                                ),
+                              )
+                              :GestureDetector(
+                                onTap: (){},
+                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: ConstAppColors.backgroundDarkColor
+                                  ),
+                                  child: Icon(Icons.camera_alt_rounded, color: ConstAppColors.mainTextColor , size: 35,)),
                                 ),
                               ),
                             ],

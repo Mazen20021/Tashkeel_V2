@@ -20,7 +20,13 @@ class AppCubit extends Cubit<AppStates> {
   bool tashkeelChosen = true;
   bool translateChosen = false;
   bool settingsChosen = false;
+  bool isServerLoading = false;
 
+  void checkServerStatus(BuildContext context)
+  {
+    isServerLoading = !isServerLoading;
+    emit(CheckServerStatus());
+  }
   void changeSelection(String name)
   {
     switch (name){
