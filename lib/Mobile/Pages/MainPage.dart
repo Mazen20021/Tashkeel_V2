@@ -1,307 +1,307 @@
+// ignore_for_file: deprecated_member_use, unused_import, use_build_context_synchronously
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tashkeelremake/Mobile/Config/Cubit.dart';
 import 'package:tashkeelremake/Mobile/Config/States.dart';
 import 'package:tashkeelremake/Mobile/Constants/AppColors.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:tashkeelremake/Mobile/Pages/Login.dart';
 import 'package:tashkeelremake/Mobile/Pages/Signup.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
+
+ 
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenSize = screenHeight * screenWidth;
-  return BlocProvider(
-      create: (BuildContext context) => AppCubit(),
+
+  return  MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AppCubit()), 
+      ],
       child: BlocConsumer<AppCubit, AppStates>(
         builder: (BuildContext context, states) {
           AppCubit appParams = AppCubit.get(context);
           return Scaffold(
             backgroundColor: ConstAppColors.backgroundDarkColor,
-            body: Center(
-              child: Transform.translate(
-                offset: Offset(0, 55),
-                child: Container(
-                  width: screenWidth * 0.9,
-                  height: screenHeight * 0.5,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 10,
-                        color: Colors.black,
-                        offset: Offset(0, 8)
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: LinearGradient(colors: [
-                      ConstAppColors.cardMainColor,
-                      ConstAppColors.cardBackColor
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Transform.translate(
-                          offset: Offset(0, -380),
+            appBar: AppBar(
+              leading: 
+                 IconButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                }, icon: Icon(Icons.logout_rounded , color: ConstAppColors.backgroundDarkColor, size: 35,)),
+              backgroundColor: ConstAppColors.cardMainColor,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  
+                   Text( "تشكيل الكلمات", style: GoogleFonts.blaka(color: ConstAppColors.backgroundDarkColor , fontSize: 35),),
+                         appParams.showTabs ? SizedBox(width: 50,):SizedBox(width: 70,),
+                         GestureDetector(
+                          onTap: () {
+                            appParams.showAllTabs(context);
+                          },
                           child: Container(
-                            width: screenWidth,
-                            height: 60,
+                            width: 50,
+                            height: 50,
                             decoration: BoxDecoration(
-                              boxShadow: [
-                              BoxShadow(
-                                blurRadius: 10,
-                                color: Colors.black,
-                                offset: Offset(0, 5)
-                              )
-                            ],
-                              borderRadius: BorderRadius.circular(10),
-                               gradient: LinearGradient(colors:  [
-                                ConstAppColors.cardMainColor,
-                                ConstAppColors.cardBackColor
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight
-                              ),
-                            ),
-                            child: Transform.translate(
-                              offset: Offset(0, -5),
-                              child: Center(child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("العربية " ,style: GoogleFonts.blaka(color: ConstAppColors.backgroundDarkColor, fontSize: 50),),
-                                  SizedBox(width: 140,),
-                                   Text("اللغة " ,style: GoogleFonts.blaka(color: ConstAppColors.backgroundDarkColor, fontSize: 50),),
-                                ],
-                              ),
-                              ),
-                            )),
-                        ),
-                      ),
-                      Center(
-                        child: Transform.translate(
-                          offset: Offset(0, -375),
-                          child: Container(
-                            width: 120,
-                            height: 120,
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                              BoxShadow(
-                                blurRadius: 10,
-                                color: Colors.black,
-                                offset: Offset(0, 10)
-                              )
-                            ],
                               borderRadius: BorderRadius.circular(100),
-                              gradient: LinearGradient(colors:  [
-                                ConstAppColors.cardMainColor,
-                                ConstAppColors.cardBackColor
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight
+                              color: ConstAppColors.cardMainColor,
+                            ),
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              transitionBuilder: (child, animation) {
+                                return RotationTransition(turns: animation, child: child);
+                              },
+                              child: Icon(
+                                appParams.showTabs
+                                    ? Icons.more_vert_rounded
+                                    : Icons.more_horiz_rounded,
+                                key: ValueKey<bool>(appParams.showTabs), // Ensures switch animation
+                                size: 35,
+                                color: ConstAppColors.backgroundDarkColor,
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Center(
-                    child: Transform.translate(
-                    offset: Offset(0, -375),
-                    child: Image.asset(
-                        'assets/image/logo v2.png', // Replace with your logo asset path
-                        width: 120, // Adjust the width as needed
-                        height: 120, // Adjust the height as needed
-                      ),
-                  ),
-                ),
-                      Column(children: [
-                         Text("تسجيل الدخول" , style: GoogleFonts.blaka(color:ConstAppColors.backgroundDarkColor, fontSize: 40 ,),),
-                         Divider(color:ConstAppColors.backgroundDarkColor , thickness: 10,),
-                         SizedBox(height: 20,),
-                         Form(
-                          key: appParams.key,
-                          child: Column(children: [
-                            SizedBox(
-                              width: screenWidth * 0.85,
-                              child: TextFormField(
-                                validator: (value) {
-                                  if(value!.isEmpty)
-                                  {
-                                    return "خطأ في البيانات";
-                                  }
-                                },
-                                  cursorColor: ConstAppColors.mainTextColor,
-                                  style: TextStyle(color: ConstAppColors.mainTextColor), 
-                                  decoration: InputDecoration(
-                                    errorStyle: GoogleFonts.alexandria(
-                                      color: ConstAppColors.backgroundDarkColor ,
-                                       fontSize: 15 , 
-                                       fontWeight: FontWeight.bold),
-                                    labelStyle: TextStyle(color: ConstAppColors.mainTextColor),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                      borderSide: BorderSide(
-                                        color: ConstAppColors.backgroundDarkColor,
-                                      ),
-                                    ),
-                                    hintStyle: TextStyle(
-                                      fontSize: 20,
-                                      color: ConstAppColors.mainTextColor),
-                                    suffixIcon: Icon(Icons.email_rounded,
-                                      color: ConstAppColors.mainTextColor,
-                                      size: 25,),
-                                    hintText: "رقم الهاتف / البريد الإلكتروني",
-                                    hintTextDirection: TextDirection.rtl,
-                                    fillColor: ConstAppColors.backgroundDarkColor,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10,),
-                              SizedBox(
-                              width: screenWidth * 0.85,
-                              child: TextFormField(
-                                 validator: (value) {
-                                  if(value!.isEmpty)
-                                  {
-                                    return "خطأ في البيانات";
-                                  }
-                                },
-                                obscureText: appParams.hidePasseword,
-                                  cursorColor: ConstAppColors.mainTextColor,
-                                  style: TextStyle(
-                                    color: ConstAppColors.mainTextColor), 
-                                  decoration: InputDecoration(
-                                    errorStyle: GoogleFonts.alexandria(
-                                      color: ConstAppColors.backgroundDarkColor ,
-                                       fontSize: 15 , 
-                                       fontWeight: FontWeight.bold),
-                                    labelStyle: TextStyle(color: ConstAppColors.mainTextColor),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                      borderSide: BorderSide(
-                                        color: ConstAppColors.backgroundDarkColor,
-                                      ),
-                                    ),
-                                    hintStyle: TextStyle(
-                                      fontSize: 20,
-                                      color: ConstAppColors.mainTextColor),
-                                    prefixIcon: 
-                                    GestureDetector(
-                                      onTap: (){
-                                        appParams.hidePassword(context);
-                                      },
-                                    child:Icon(
-                                      appParams.hidePasseword ? 
-                                      Icons.remove_red_eye_rounded:Icons.visibility_off_rounded,
-                                      color: ConstAppColors.mainTextColor,
-                                      ),
-                                      ),
-                                    suffixIcon: Icon(
-                                      Icons.lock,
-                                      color: ConstAppColors.mainTextColor,
-                                      size: 25,
-                                    ),
-                                    hintText: "كلمـــــة الســــــر",
-                                    hintTextDirection: TextDirection.rtl,
-                                    fillColor: ConstAppColors.backgroundDarkColor,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: appParams.key.currentState?.validate() == true? 35 : 20,),
-                              GestureDetector(
-                                onTap: (){
-                                  if(appParams.key.currentState?.validate() == true)
-                                  {
-                                    appParams.updatePage(context);
-                                    appParams.appLoading(context);
-                                  }
-                                },
-                                child: Container(
-                                  width: screenWidth * 0.85,
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 10,
-                                        color: Colors.black,
-                                        offset: Offset(0, 8)
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(5),
-                                    color:ConstAppColors.backgroundDarkColor,
-                                  ),
-                                  child: Center(child: 
-                                  appParams.isLoading ? 
-                                  LoadingAnimationWidget.staggeredDotsWave(
-                                     color: ConstAppColors.cardMainColor,
-                                     size: 40,
-                                  ):Text("تـــــــأكــــــيـــــــــد" , style: GoogleFonts.alexandria(
-                                    shadows: [
-                                      Shadow(
-                                        blurRadius: 10,
-                                        color: Colors.black,
-                                        offset: Offset(0, 3)
-                                      ),
-                                    ],
-                                    color:ConstAppColors.cardMainColor, fontSize: 30 , fontWeight: FontWeight.bold))),
-                                ),
-                              ),
-                              SizedBox(height: 45,),
-                              Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                     GestureDetector(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
-                                    },
-                                    child: Text("إنشاء حساب جديد" , style: GoogleFonts.alexandria(
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 5,
-                                        color: Colors.black,
-                                        offset: Offset(0, 0)
-                                        )
-                                      ],
-                                      color: ConstAppColors.backgroundDarkColor , fontSize: 15 , fontWeight: FontWeight.bold),),
-                                  ),
-                                  SizedBox(width: 80,),
-                                  GestureDetector(
-                                    onTap: (){},
-                                    child: Text("نسيت كلمة السر" , style: GoogleFonts.alexandria(
-                                       shadows: [
-                                        Shadow(
-                                          blurRadius: 5,
-                                        color: Colors.black,
-                                        offset: Offset(0, 0)
-                                        )
-                                      ],
-                                      color: ConstAppColors.backgroundDarkColor , fontSize: 15 , fontWeight: FontWeight.bold),),
-                                  ),
-                                ],),
-                              )
-                         ],))
-                      ],),
-                    ],
-                  ),
-                ),
+                   appParams.showTabs ? SizedBox(width: 20,):SizedBox()
+                ],
               ),
             ),
-          );
-  }, listener: (BuildContext context, AppStates state) { },),);
+            body: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        const SizedBox(height: 40), 
+                        Container(
+                          width: screenWidth ,
+                          height: 300,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+                            color: ConstAppColors.cardMainColor,
+                          ),
+                          child: TextFormField(
+                            controller: appParams.userInputText,
+                            style: GoogleFonts.mada(
+                              color: Colors.black,
+                              fontSize: 25,
+                            ),
+                            textDirection: TextDirection.rtl,
+                            decoration: InputDecoration(
+                              hintStyle: GoogleFonts.mada(
+                                color: Colors.black,
+                                fontSize: 25,
+                              ),
+                              hintText: 'اكتب رسالة',
+                              border: InputBorder.none,
+                              hintTextDirection: TextDirection.rtl,
+                            ),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r'[\u0600-\u06FF\s]'),
+                              ),
+                            ],
+                            textAlignVertical: TextAlignVertical.top,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            expands:
+                            true, // This makes the TextFormField expand vertically
+                          ),
+                        ),
+                        SizedBox(height: 10,),
+                        Container(
+                          width: screenWidth,
+                          height: 350,
+                        decoration: BoxDecoration(
+                          color: ConstAppColors.cardBackColor,
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child:GestureDetector(
+                                    onTap: () {
+                                      Clipboard.setData(ClipboardData(text: appParams.serverOutputText.text)).then((_) {
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            backgroundColor: Colors.black,
+                                            content: Row(
+                                              children: [
+                                                const Spacer(),
+                                                const Icon(Icons.check_circle_outline_rounded , color: Colors.green , size: 35,),
+                                                const SizedBox(width: 10,),
+                                                Text('تـــم لســـق النـــص' , style: GoogleFonts.alexandria(color: Colors.white , fontSize: 15),),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      });
+                                    },
+                                    child:TextFormField(
+                                      enabled: false,
+                                      style: GoogleFonts.mada(
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                      ),
+                                      controller:appParams.serverOutputText,
+                                      textDirection: TextDirection.rtl,
+                                      decoration: InputDecoration(
+                                        hintStyle: GoogleFonts.mada(
+                                          color: Colors.black,
+                                          fontSize: 25,
+                                        ),
+                                        hintText: 'التشكيل',
+                                        border: InputBorder.none,
+                                        hintTextDirection: TextDirection.rtl,
+                                      ),
+                                      textAlignVertical: TextAlignVertical.top,
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: null,
+                                    ),),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Transform.translate(
+                          offset: Offset(0, -390),
+                          child: GestureDetector(
+                            onTap: (){},
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: ConstAppColors.backgroundDarkColor
+                              ),
+                              child: Icon(Icons.check_circle_rounded , color: ConstAppColors.cardMainColor,size: 60,),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (appParams.showTabs) 
+                      Transform.translate(
+                       offset: Offset(293, 0),
+                        child: Container(
+                          width: 120,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            color:const Color.fromARGB(255, 33, 31, 37).withOpacity(0.65),
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  appParams.changeSelection("TSH");
+                                },
+                                child: buildOption(
+                                  Icons.edit_note_rounded,
+                                  "تشكيل",
+                                  appParams.tashkeelChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
+                                  appParams.tashkeelChosen ? Colors.white : ConstAppColors.cardMainColor,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  appParams.changeSelection("TRS");
+                                },
+                                child: buildOption(
+                                  Icons.translate_rounded,
+                                  "ترجمة",
+                                  appParams.translateChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
+                                  appParams.translateChosen ? Colors.white : ConstAppColors.cardMainColor,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  appParams.changeSelection("SET");
+                                },
+                                child: buildOption(
+                                  Icons.settings,
+                                  "إعدادات",
+                                  appParams.settingsChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
+                                  appParams.settingsChosen ? Colors.white : ConstAppColors.cardMainColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Transform.translate(offset: Offset(0, 740),
+                      child: Container(
+                        width: screenWidth,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: ConstAppColors.cardMainColor,
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: (){},
+                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Icon(Icons.file_present_rounded , color: ConstAppColors.backgroundDarkColor , size: 35,),
+                                ),
+                              ),
+                              Spacer(),
+                              GestureDetector(
+                                onTap: (){},
+                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Icon(Icons.mic, color: ConstAppColors.backgroundDarkColor , size: 35,),
+                                ),
+                              ),
+                              Spacer(),
+                              GestureDetector(
+                                onTap: (){},
+                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Icon(Icons.camera_alt_rounded, color: ConstAppColors.backgroundDarkColor , size: 35,),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      ),
+                  ],
+                ),
+              );
+            }, listener: (BuildContext context, AppStates state) {},),);
+      }
   }
-}
+  Widget buildOption(IconData icon, String text , Color backgroundColor , Color textColor) {
+    return Container(
+      width: 110,
+      height: 40,
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: textColor),
+          const SizedBox(width: 10),
+          Text(text, style: TextStyle(color: textColor, fontSize: 18)),
+        ],
+      ),
+    );
+  }

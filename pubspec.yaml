@@ -45,6 +45,7 @@ dependencies:
   flutter_bloc: ^9.1.0
   loading_animation_widget: ^1.3.0
   google_fonts: ^6.2.1
+  audioplayers: ^6.4.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +72,7 @@ flutter:
     - assets/image/logo.png
     - assets/image/logo v2.png
     - assets/image/background.png
+    - assets/audio/intro.mp3
   fonts:
     - family: KhebratMusamim
       fonts:

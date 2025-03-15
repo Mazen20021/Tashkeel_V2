@@ -5,10 +5,11 @@ import 'package:tashkeelremake/Mobile/Config/Cubit.dart';
 import 'package:tashkeelremake/Mobile/Config/States.dart';
 import 'package:tashkeelremake/Mobile/Constants/AppColors.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:tashkeelremake/Mobile/Pages/Login.dart';
+import 'package:tashkeelremake/Mobile/Pages/MainPage.dart';
+import 'package:tashkeelremake/Mobile/Pages/Signup.dart';
 
-class SignUp extends StatelessWidget {
-  const SignUp({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class SignUp extends StatelessWidget {
                 offset: Offset(0, 55),
                 child: Container(
                   width: screenWidth * 0.9,
-                  height: appParams.key.currentState?.validate() == true ? screenHeight * 0.55 : (appParams.confirmPasswordController.text == appParams.passwordController.text)? screenHeight * 0.65 : screenHeight * 0.55   ,
+                  height: screenHeight * 0.5,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -121,7 +122,7 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
                       Column(children: [
-                         Text(" حساب جديد" , style: GoogleFonts.blaka(color:ConstAppColors.backgroundDarkColor, fontSize: 40 ,),),
+                         Text("تسجيل الدخول" , style: GoogleFonts.blaka(color:ConstAppColors.backgroundDarkColor, fontSize: 40 ,),),
                          Divider(color:ConstAppColors.backgroundDarkColor , thickness: 10,),
                          SizedBox(height: 20,),
                          Form(
@@ -130,7 +131,6 @@ class SignUp extends StatelessWidget {
                             SizedBox(
                               width: screenWidth * 0.85,
                               child: TextFormField(
-                                controller: appParams.emailController,
                                 validator: (value) {
                                   if(value!.isEmpty)
                                   {
@@ -171,7 +171,6 @@ class SignUp extends StatelessWidget {
                               SizedBox(
                               width: screenWidth * 0.85,
                               child: TextFormField(
-                                controller: appParams.passwordController,
                                  validator: (value) {
                                   if(value!.isEmpty)
                                   {
@@ -223,66 +222,6 @@ class SignUp extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 10,),
-                              SizedBox(
-                              width: screenWidth * 0.85,
-                              child: TextFormField(
-                                controller: appParams.confirmPasswordController,
-                                 validator: (value) {
-                                  if(value!.isEmpty)
-                                  {
-                                    return "خطأ في البيانات";
-                                  }
-                                  else if(appParams.passwordController.text != appParams.confirmPasswordController.text)
-                                  {
-                                    return "كلمة السر غير متطابقة";
-                                  }
-                                },
-                                obscureText: appParams.hideConfirmPasseword,
-                                  cursorColor: ConstAppColors.mainTextColor,
-                                  style: TextStyle(
-                                    color: ConstAppColors.mainTextColor), 
-                                  decoration: InputDecoration(
-                                    errorStyle: GoogleFonts.alexandria(
-                                      color: ConstAppColors.backgroundDarkColor ,
-                                       fontSize: 15 , 
-                                       fontWeight: FontWeight.bold),
-                                    labelStyle: TextStyle(color: ConstAppColors.mainTextColor),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                      borderSide: BorderSide(
-                                        color: ConstAppColors.backgroundDarkColor,
-                                      ),
-                                    ),
-                                    hintStyle: TextStyle(
-                                      fontSize: 20,
-                                      color: ConstAppColors.mainTextColor),
-                                    prefixIcon: 
-                                    GestureDetector(
-                                      onTap: (){
-                                        appParams.hideConfirmPassword(context);
-                                      },
-                                    child:Icon(
-                                      appParams.hideConfirmPasseword ? 
-                                      Icons.remove_red_eye_rounded:Icons.visibility_off_rounded,
-                                      color: ConstAppColors.mainTextColor,
-                                      ),
-                                      ),
-                                    suffixIcon: Icon(
-                                      Icons.lock,
-                                      color: ConstAppColors.mainTextColor,
-                                      size: 25,
-                                    ),
-                                    hintText: "تأكيد كلمة السـر",
-                                    hintTextDirection: TextDirection.rtl,
-                                    fillColor: ConstAppColors.backgroundDarkColor,
-                                    filled: true,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                  ),
-                                ),
-                              ),
                               SizedBox(height: appParams.key.currentState?.validate() == true? 35 : 20,),
                               GestureDetector(
                                 onTap: (){
@@ -290,6 +229,7 @@ class SignUp extends StatelessWidget {
                                   {
                                     appParams.updatePage(context);
                                     appParams.appLoading(context);
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()));
                                   }
                                 },
                                 child: Container(
@@ -311,7 +251,7 @@ class SignUp extends StatelessWidget {
                                   LoadingAnimationWidget.staggeredDotsWave(
                                      color: ConstAppColors.cardMainColor,
                                      size: 40,
-                                  ):Text("إنشاء حساب جديد" , style: GoogleFonts.alexandria(
+                                  ):Text("تــــســــجـــــيـــــل" , style: GoogleFonts.alexandria(
                                     shadows: [
                                       Shadow(
                                         blurRadius: 10,
@@ -329,9 +269,9 @@ class SignUp extends StatelessWidget {
                                   children: [
                                      GestureDetector(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignUp()));
                                     },
-                                    child: Text("تسجيل الدخول" , style: GoogleFonts.alexandria(
+                                    child: Text("إنشاء حساب جديد" , style: GoogleFonts.alexandria(
                                       shadows: [
                                         Shadow(
                                           blurRadius: 5,
@@ -341,8 +281,19 @@ class SignUp extends StatelessWidget {
                                       ],
                                       color: ConstAppColors.backgroundDarkColor , fontSize: 15 , fontWeight: FontWeight.bold),),
                                   ),
-                                  
-                                  SizedBox(width: 225,),
+                                  SizedBox(width: 80,),
+                                  GestureDetector(
+                                    onTap: (){},
+                                    child: Text("نسيت كلمة السر" , style: GoogleFonts.alexandria(
+                                       shadows: [
+                                        Shadow(
+                                          blurRadius: 5,
+                                        color: Colors.black,
+                                        offset: Offset(0, 0)
+                                        )
+                                      ],
+                                      color: ConstAppColors.backgroundDarkColor , fontSize: 15 , fontWeight: FontWeight.bold),),
+                                  ),
                                 ],),
                               )
                          ],))
