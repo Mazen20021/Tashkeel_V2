@@ -17,15 +17,41 @@ class AppCubit extends Cubit<AppStates> {
   final TextEditingController userInputText = TextEditingController();
   final TextEditingController serverOutputText = TextEditingController();
   bool showTabs = false;
-  bool tashkeelChosen = true;
+  bool tashkeelChosen = false;
   bool translateChosen = false;
   bool settingsChosen = false;
   bool isServerLoading = false;
+  String? selectedValue;
+  List<String> items = ["English", "العربية", "French", "German" , "Itally"];
+  bool itemChanged = false;
 
   void checkServerStatus(BuildContext context)
   {
     isServerLoading = !isServerLoading;
     emit(CheckServerStatus());
+  }
+  void changeItems(BuildContext context){
+      itemChanged = !itemChanged;
+      emit(ChangeItem());
+  }
+  void initializePages(BuildContext context , int num ){
+      switch(num){
+            case 0 :
+              tashkeelChosen = true;
+              translateChosen = false;
+              settingsChosen = false ;
+            break;
+            case 1 :
+              tashkeelChosen = false;
+              translateChosen = true;
+              settingsChosen = false ;
+            break;
+            case 2 :
+              tashkeelChosen = false;
+              translateChosen = false;
+              settingsChosen = true ;
+            break;
+    }
   }
   void changeSelection(String name)
   {

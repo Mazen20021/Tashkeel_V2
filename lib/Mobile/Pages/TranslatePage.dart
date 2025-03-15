@@ -8,24 +8,21 @@ import 'package:tashkeelremake/Mobile/Config/States.dart';
 import 'package:tashkeelremake/Mobile/Constants/AppColors.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:tashkeelremake/Mobile/Pages/Login.dart';
+import 'package:tashkeelremake/Mobile/Pages/MainPage.dart';
 import 'package:tashkeelremake/Mobile/Pages/SettingsPage.dart';
 import 'package:tashkeelremake/Mobile/Pages/Signup.dart';
-import 'package:tashkeelremake/Mobile/Pages/TranslatePage.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class TransplatePage extends StatelessWidget {
+  const TransplatePage({super.key});
 
- @override
- void initState()
- {
-  
- }
+ 
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenSize = screenHeight * screenWidth;
+
   return  MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AppCubit()), 
@@ -44,12 +41,13 @@ class MainPage extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                   Text( "تشكيل الكلمات", style: GoogleFonts.blaka(color: ConstAppColors.backgroundDarkColor , fontSize: 35),),
+                  
+                   Text( "ترجم الكلمات", style: GoogleFonts.blaka(color: ConstAppColors.backgroundDarkColor , fontSize: 35),),
                          appParams.showTabs ? SizedBox(width: 50,):SizedBox(width: 70,),
                          GestureDetector(
                           onTap: () {
                             appParams.showAllTabs(context);
-                            appParams.initializePages(context , 0);
+                            appParams.initializePages(context , 1);
                           },
                           child: Container(
                             width: 50,
@@ -82,7 +80,40 @@ class MainPage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        const SizedBox(height: 40), 
+                        const SizedBox(height: 10), 
+                          Container(
+                            width: screenWidth,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: ConstAppColors.cardMainColor,
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 12), // Add padding for better spacing
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                style: TextStyle(
+                                  color: ConstAppColors.backgroundDarkColor ,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold
+                                ),
+                                dropdownColor: const Color.fromARGB(255, 224, 224, 224).withOpacity(0.9),
+                                isExpanded: true, // Ensures the dropdown takes the full width of the container
+                                hint: Text("إختر اللغة التي تريد أن تترجم لها"),
+                                alignment: Alignment.centerRight,
+                                value: appParams.selectedValue,
+                                onChanged: (String? newValue) {
+                                  appParams.selectedValue = newValue;
+                                  appParams.changeItems(context);
+                                },
+                                items: appParams.items.map((String item) {
+                                  return DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(item),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10), 
                         Container(
                           width: screenWidth ,
                           height: 300,
@@ -103,7 +134,7 @@ class MainPage extends StatelessWidget {
                                 color: Colors.black,
                                 fontSize: 25,
                               ),
-                              hintText: 'اكتب رسالة',
+                              hintText: 'اكتب الجملة',
                               border: InputBorder.none,
                               hintTextDirection: TextDirection.rtl,
                             ),
@@ -122,7 +153,7 @@ class MainPage extends StatelessWidget {
                         SizedBox(height: 10,),
                         Container(
                           width: screenWidth,
-                          height: 350,
+                          height: 335,
                         decoration: BoxDecoration(
                           color: ConstAppColors.cardBackColor,
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5)),
@@ -198,7 +229,7 @@ class MainPage extends StatelessWidget {
                                           color: Colors.black,
                                           fontSize: 25,
                                         ),
-                                      hintText: appParams.isServerLoading ? '' : 'التشكيل', // Ensure hintText is always a String
+                                      hintText: appParams.isServerLoading ? '' : 'الترجمة', // Ensure hintText is always a String
                                       suffixIcon: appParams.isServerLoading 
                                           ? LoadingAnimationWidget.staggeredDotsWave(
                                               color: Colors.black,
@@ -219,7 +250,7 @@ class MainPage extends StatelessWidget {
                         ),
                       ),
                       Transform.translate(
-                          offset: Offset(0, -390),
+                          offset: Offset(0, -375),
                           child: appParams.isServerLoading ? 
                             GestureDetector(
                             onTap: (){
@@ -246,7 +277,7 @@ class MainPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(100),
                                 color: ConstAppColors.backgroundDarkColor
                               ),
-                              child: Icon(Icons.check_circle_rounded , color: const Color.fromARGB(255, 181, 255, 96),size: 60,),
+                              child: Icon(Icons.translate_rounded , color: ConstAppColors.cardMainColor,size: 60,),
                             ),
                           ),
                         ),
@@ -271,6 +302,7 @@ class MainPage extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   appParams.changeSelection("TSH");
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage()));
                                 },
                                 child: buildOption(
                                   Icons.edit_note_rounded,
@@ -283,7 +315,6 @@ class MainPage extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   appParams.changeSelection("TRS");
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TransplatePage()));
                                 },
                                 child: buildOption(
                                   Icons.translate_rounded,
@@ -303,6 +334,7 @@ class MainPage extends StatelessWidget {
                                   "إعدادات",
                                   appParams.settingsChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
                                   appParams.settingsChosen ? Colors.white : ConstAppColors.cardMainColor,
+                                  
                                 ),
                               ),
                             ],

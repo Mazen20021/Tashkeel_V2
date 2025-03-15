@@ -9,3 +9,5 @@ class ChooseTashkeel extends AppStates{}
 class ChooseTranslate extends AppStates{}
 class ChooseSettings extends AppStates{}
 class CheckServerStatus extends AppStates{}
+class RefreshState extends AppStates{}
+class ChangeItem extends AppStates{}
