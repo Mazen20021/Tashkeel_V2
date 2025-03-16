@@ -11,3 +11,4 @@ class ChooseSettings extends AppStates{}
 class CheckServerStatus extends AppStates{}
 class RefreshState extends AppStates{}
 class ChangeItem extends AppStates{}
+class ChooseInfo extends AppStates{}

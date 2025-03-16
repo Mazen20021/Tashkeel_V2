@@ -1,20 +1,19 @@
 // ignore_for_file: deprecated_member_use, unused_import, use_build_context_synchronously
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tashkeelremake/Mobile/Config/Cubit.dart';
 import 'package:tashkeelremake/Mobile/Config/States.dart';
 import 'package:tashkeelremake/Mobile/Constants/AppColors.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:tashkeelremake/Mobile/Pages/Info.dart';
 import 'package:tashkeelremake/Mobile/Pages/Login.dart';
 import 'package:tashkeelremake/Mobile/Pages/MainPage.dart';
+import 'package:tashkeelremake/Mobile/Pages/SettingsPage.dart';
 import 'package:tashkeelremake/Mobile/Pages/Signup.dart';
 import 'package:tashkeelremake/Mobile/Pages/TranslatePage.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class InfoPage extends StatelessWidget {
+  const InfoPage({super.key});
 
  
 
@@ -42,12 +41,12 @@ class SettingsPage extends StatelessWidget {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                   Text( "الإعدادات ", style: GoogleFonts.blaka(color: ConstAppColors.backgroundDarkColor , fontSize: 35),),
+                   Text( "عن البرنامج", style: GoogleFonts.blaka(color: ConstAppColors.backgroundDarkColor , fontSize: 35),),
                          appParams.showTabs ? SizedBox(width: 50,):SizedBox(width: 70,),
                          GestureDetector(
                           onTap: () {
                             appParams.showAllTabs(context);
-                            appParams.initializePages(context , 2 );
+                            appParams.initializePages(context , 3 );
                           },
                           child: Container(
                             width: 50,

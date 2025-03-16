@@ -7,6 +7,7 @@ import 'package:tashkeelremake/Mobile/Config/Cubit.dart';
 import 'package:tashkeelremake/Mobile/Config/States.dart';
 import 'package:tashkeelremake/Mobile/Constants/AppColors.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:tashkeelremake/Mobile/Pages/Info.dart';
 import 'package:tashkeelremake/Mobile/Pages/Login.dart';
 import 'package:tashkeelremake/Mobile/Pages/MainPage.dart';
 import 'package:tashkeelremake/Mobile/Pages/SettingsPage.dart';
@@ -286,9 +287,9 @@ class TransplatePage extends StatelessWidget {
                     if (appParams.showTabs) 
                       Transform.translate(
                        offset: Offset(293, 0),
-                        child: Container(
+                        child:  Container(
                           width: 120,
-                          height: 150,
+                          height: 200,
                           decoration: BoxDecoration(
                             color:const Color.fromARGB(255, 33, 31, 37).withOpacity(0.65),
                             borderRadius: const BorderRadius.only(
@@ -315,6 +316,7 @@ class TransplatePage extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   appParams.changeSelection("TRS");
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TransplatePage()));
                                 },
                                 child: buildOption(
                                   Icons.translate_rounded,
@@ -334,7 +336,19 @@ class TransplatePage extends StatelessWidget {
                                   "إعدادات",
                                   appParams.settingsChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
                                   appParams.settingsChosen ? Colors.white : ConstAppColors.cardMainColor,
-                                  
+                                ),
+                              ),
+                              const SizedBox(height: 10,),
+                              GestureDetector(
+                                onTap: () {
+                                  appParams.changeSelection("INFO");
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => InfoPage()));
+                                },
+                                child: buildOption(
+                                  Icons.info_outline_rounded,
+                                  " البرنامج",
+                                  appParams.infoChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
+                                  appParams.infoChosen ? Colors.white : ConstAppColors.cardMainColor,
                                 ),
                               ),
                             ],

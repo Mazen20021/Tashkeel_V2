@@ -19,6 +19,7 @@ class AppCubit extends Cubit<AppStates> {
   bool showTabs = false;
   bool tashkeelChosen = false;
   bool translateChosen = false;
+  bool infoChosen = false;
   bool settingsChosen = false;
   bool isServerLoading = false;
   String? selectedValue;
@@ -40,16 +41,25 @@ class AppCubit extends Cubit<AppStates> {
               tashkeelChosen = true;
               translateChosen = false;
               settingsChosen = false ;
+              infoChosen = false;
             break;
             case 1 :
               tashkeelChosen = false;
               translateChosen = true;
               settingsChosen = false ;
+              infoChosen = false;
             break;
             case 2 :
               tashkeelChosen = false;
               translateChosen = false;
               settingsChosen = true ;
+              infoChosen = false ;
+            break;
+            case 3 :
+             tashkeelChosen = false;
+              translateChosen = false;
+              settingsChosen = false ;
+              infoChosen = true ;
             break;
     }
   }
@@ -60,19 +70,29 @@ class AppCubit extends Cubit<AppStates> {
       tashkeelChosen = true;
       translateChosen = false;
       settingsChosen = false;
+      infoChosen = false;
       emit(ChooseTashkeel());
       break;
       case "TRS" :
       tashkeelChosen = false;
       translateChosen = true;
       settingsChosen = false;
+      infoChosen = false;
       emit(ChooseTranslate());
       break;
       case "SET" :
       tashkeelChosen = false;
       translateChosen = false;
       settingsChosen = true;
+      infoChosen = false;
       emit(ChooseSettings());
+      break;
+      case "INFO":
+      tashkeelChosen = false;
+      translateChosen = false;
+      settingsChosen = false;
+      infoChosen = true;
+      emit(ChooseInfo());
       break;
     }
   }
