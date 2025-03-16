@@ -117,7 +117,7 @@ class TransplatePage extends StatelessWidget {
                           const SizedBox(height: 10), 
                         Container(
                           width: screenWidth ,
-                          height: 300,
+                          height: 280,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5)),
                             color: ConstAppColors.cardMainColor,
@@ -154,7 +154,7 @@ class TransplatePage extends StatelessWidget {
                         SizedBox(height: 10,),
                         Container(
                           width: screenWidth,
-                          height: 335,
+                          height: 280,
                         decoration: BoxDecoration(
                           color: ConstAppColors.cardBackColor,
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5)),
@@ -251,7 +251,7 @@ class TransplatePage extends StatelessWidget {
                         ),
                       ),
                       Transform.translate(
-                          offset: Offset(0, -375),
+                          offset: Offset(0, -315),
                           child: appParams.isServerLoading ? 
                             GestureDetector(
                             onTap: (){
@@ -285,9 +285,9 @@ class TransplatePage extends StatelessWidget {
                       ],
                     ),
                     if (appParams.showTabs) 
-                      Transform.translate(
-                       offset: Offset(293, 0),
-                        child:  Container(
+                      Positioned(
+                        right: 0,
+                        child: Container(
                           width: 120,
                           height: 200,
                           decoration: BoxDecoration(
@@ -316,7 +316,6 @@ class TransplatePage extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   appParams.changeSelection("TRS");
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TransplatePage()));
                                 },
                                 child: buildOption(
                                   Icons.translate_rounded,
@@ -346,7 +345,7 @@ class TransplatePage extends StatelessWidget {
                                 },
                                 child: buildOption(
                                   Icons.info_outline_rounded,
-                                  " البرنامج",
+                                  " معلومات",
                                   appParams.infoChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
                                   appParams.infoChosen ? Colors.white : ConstAppColors.cardMainColor,
                                 ),
@@ -355,11 +354,13 @@ class TransplatePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Transform.translate(offset: Offset(0, 740),
+                     Positioned(
+                      bottom: 0,
                       child: Container(
                         width: screenWidth,
                         height: 60,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
                           color: ConstAppColors.cardMainColor,
                         ),
                         child: Center(
@@ -369,7 +370,7 @@ class TransplatePage extends StatelessWidget {
                               appParams.isServerLoading ? 
                                GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only(right: 25 , top: 10 , bottom: 10),
                                 child: Container(
                                   width: 50,
                                   height: 50,
@@ -382,7 +383,7 @@ class TransplatePage extends StatelessWidget {
                               ):
                               GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only(right: 25 , top: 10 , bottom: 10),
                                 child: Container(
                                   width: 50,
                                   height: 50,
@@ -393,11 +394,10 @@ class TransplatePage extends StatelessWidget {
                                   child: Icon(Icons.file_present_rounded , color: Colors.redAccent , size: 35,)),
                                 ),
                               ),
-                              Spacer(),
                               appParams.isServerLoading ? 
                               GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only( left:  25, right: 25 , top: 10 , bottom: 10),
                                 child: Container(
                                    width: 120,
                                   height: 50,
@@ -410,7 +410,7 @@ class TransplatePage extends StatelessWidget {
                               )
                               :GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only( left:  25, right: 25 , top: 10 , bottom: 10),
                                 child: Container(
                                    width: 120,
                                   height: 50,
@@ -421,11 +421,10 @@ class TransplatePage extends StatelessWidget {
                                   child: Icon(Icons.mic, color: const Color.fromARGB(255, 255, 255, 255)  , size: 35,)),
                                 ),
                               ),
-                              Spacer(),
                               appParams.isServerLoading ? 
                               GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only( left:  25 , top: 10 , bottom: 10),
                                 child: Container(
                                   width: 50,
                                   height: 50,
@@ -438,7 +437,7 @@ class TransplatePage extends StatelessWidget {
                               )
                               :GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only( left:  25 , top: 10 , bottom: 10),
                                 child: Container(
                                   width: 50,
                                   height: 50,

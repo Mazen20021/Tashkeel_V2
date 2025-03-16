@@ -16,11 +16,6 @@ import 'package:tashkeelremake/Mobile/Pages/TranslatePage.dart';
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
- @override
- void initState()
- {
-  
- }
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +38,11 @@ class MainPage extends StatelessWidget {
                 }, icon: Icon(Icons.logout_rounded , color: ConstAppColors.backgroundDarkColor, size: 35,)),
               backgroundColor: ConstAppColors.cardMainColor,
               title: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  appParams.showTabs ? SizedBox(width: 38,) : SizedBox(width: 32,) ,
                    Text( "تشكيل الكلمات", style: GoogleFonts.blaka(color: ConstAppColors.backgroundDarkColor , fontSize: 35),),
-                         appParams.showTabs ? SizedBox(width: 50,):SizedBox(width: 70,),
+                         appParams.showTabs ? SizedBox(width: 36,):SizedBox(width: 50,),
                          GestureDetector(
                           onTap: () {
                             appParams.showAllTabs(context);
@@ -83,7 +79,7 @@ class MainPage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        const SizedBox(height: 40), 
+                        SizedBox(height: 10,),
                         Container(
                           width: screenWidth ,
                           height: 300,
@@ -104,7 +100,7 @@ class MainPage extends StatelessWidget {
                                 color: Colors.black,
                                 fontSize: 25,
                               ),
-                              hintText: 'اكتب رسالة',
+                              hintText: 'اكتب الكلمات',
                               border: InputBorder.none,
                               hintTextDirection: TextDirection.rtl,
                             ),
@@ -254,8 +250,8 @@ class MainPage extends StatelessWidget {
                       ],
                     ),
                     if (appParams.showTabs) 
-                      Transform.translate(
-                       offset: Offset(293, 0),
+                      Positioned(
+                        right: 0,
                         child: Container(
                           width: 120,
                           height: 200,
@@ -323,11 +319,13 @@ class MainPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Transform.translate(offset: Offset(0, 740),
+                     Positioned(
+                      bottom: 0,
                       child: Container(
                         width: screenWidth,
                         height: 60,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
                           color: ConstAppColors.cardMainColor,
                         ),
                         child: Center(
@@ -337,7 +335,7 @@ class MainPage extends StatelessWidget {
                               appParams.isServerLoading ? 
                                GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only(right: 25 , top: 10 , bottom: 10),
                                 child: Container(
                                   width: 50,
                                   height: 50,
@@ -350,7 +348,7 @@ class MainPage extends StatelessWidget {
                               ):
                               GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only(right: 25 , top: 10 , bottom: 10),
                                 child: Container(
                                   width: 50,
                                   height: 50,
@@ -361,11 +359,10 @@ class MainPage extends StatelessWidget {
                                   child: Icon(Icons.file_present_rounded , color: Colors.redAccent , size: 35,)),
                                 ),
                               ),
-                              Spacer(),
                               appParams.isServerLoading ? 
                               GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only( left:  25, right: 25 , top: 10 , bottom: 10),
                                 child: Container(
                                    width: 120,
                                   height: 50,
@@ -378,7 +375,7 @@ class MainPage extends StatelessWidget {
                               )
                               :GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only( left:  25, right: 25 , top: 10 , bottom: 10),
                                 child: Container(
                                    width: 120,
                                   height: 50,
@@ -389,11 +386,10 @@ class MainPage extends StatelessWidget {
                                   child: Icon(Icons.mic, color: const Color.fromARGB(255, 255, 255, 255)  , size: 35,)),
                                 ),
                               ),
-                              Spacer(),
                               appParams.isServerLoading ? 
                               GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only( left:  25 , top: 10 , bottom: 10),
                                 child: Container(
                                   width: 50,
                                   height: 50,
@@ -406,7 +402,7 @@ class MainPage extends StatelessWidget {
                               )
                               :GestureDetector(
                                 onTap: (){},
-                                child: Padding(padding: EdgeInsets.all(10),
+                                child: Padding(padding: EdgeInsets.only( left:  25 , top: 10 , bottom: 10),
                                 child: Container(
                                   width: 50,
                                   height: 50,

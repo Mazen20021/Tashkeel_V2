@@ -85,42 +85,41 @@ class SettingsPage extends StatelessWidget {
                           width: screenWidth ,
                           height: 250,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                            borderRadius: BorderRadius.circular(10),
                             color: ConstAppColors.cardMainColor,
                           ),
                           child: Column(children: [
                             Center(
                               child: Column(
                                 children: [
-                                  Transform.translate(
-                                    offset: Offset(0, -20),
-                                    child: Icon(Icons.info_sharp , color: ConstAppColors.backgroundDarkColor,size: 100,)),
-                                  Text("فريق العمل ", style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 30),),
-                                  SizedBox(height: 10,),
-                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(5),
-                                        child: Text("م: عمر علاء الدين" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 20),),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(5),
-                                        child: Text(" م: مازن أحمد عبدالخالق" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 20),),
-                                      ),
-                                  ],),
-                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(right: 26),
-                                        child: Text(" م: محمد صالح " , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 20),),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(right: 1),
-                                        child: Text("م: أحمد محمد الديري " , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 20),),
-                                      ),
-                                  ],),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Text(" إعدادات التطبيق ", style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 30),),
+                                  ),
+                                  Divider(color: ConstAppColors.backgroundDarkColor,thickness: 10,height: 10,),
+                                 Padding(
+                                     padding: const EdgeInsets.only(top: 0,bottom: 10),
+                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                       children: [
+                                         Center(
+                                           child: Text("نظام الصوت" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 25),),
+                                         ),
+                                       ],
+                                     ),
+                                   ),
+                                   Divider(color: ConstAppColors.backgroundDarkColor,thickness: 10,height: 50,),
+                                   Padding(
+                                     padding: const EdgeInsets.only(top: 0,bottom: 10),
+                                     child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                       children: [
+                                         Center(
+                                           child: Text("نظام الألوان" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 25),),
+                                         ),
+                                       ],
+                                     ),
+                                   ),
                                 ],
                               ),
                             )
@@ -131,16 +130,18 @@ class SettingsPage extends StatelessWidget {
                           width: screenWidth ,
                           height: 250,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                            borderRadius: BorderRadius.circular(10),
                             color: ConstAppColors.cardMainColor,
                           ),
                           child: Column(children: [
                             Center(
                               child: Column(
                                 children: [
-                                  Transform.translate(
-                                    offset: Offset(0, -20),
-                                    child: Icon(Icons.supervised_user_circle_rounded , color: ConstAppColors.backgroundDarkColor,size: 100,)),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Text(" بيانات المستخدم ", style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 30),),
+                                  ),
+                                  Divider(color: ConstAppColors.backgroundDarkColor,thickness: 10,height: 10,),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
@@ -166,70 +167,104 @@ class SettingsPage extends StatelessWidget {
                                         child: Text(" :  كلمـــــــة الســـــــر" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 20),),
                                       ),
                                   ],),
+
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 19),
+                                    child: Center(
+                                      child:  GestureDetector(onTap: (){},
+                                    child: Container(
+                                    width: screenWidth,
+                                    height: 70,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) , bottomRight: Radius.circular(5)),
+                                      color: const Color.fromARGB(255, 170, 23, 12),
+                                    ),
+                                    child: Center(child: 
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                         Padding(
+                                           padding: const EdgeInsets.all(8.0),
+                                           child: Icon(Icons.remove_circle_rounded , color: Colors.white, size: 30,),
+                                         ),
+                                        Text("مسح الحساب" , style: GoogleFonts.alexandria(
+                                          color:Colors.white, fontSize: 25 , fontWeight: FontWeight.bold)),
+                                         
+                                      ],
+                                    )),
+                                                                    ),
+                                                                  ),
+                                    ),
+                                  )
                                 ],
                               ),
                             )
                           ],)
                         ),
-                         Transform.translate(
-                          offset: Offset(0, 10),
-                           child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: ConstAppColors.cardMainColor,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 10,
-                                  offset: Offset(0, 12),
-                                  color: const Color.fromARGB(141, 0, 0, 0))
-                              ]
-                            ),
-                             child: Image.asset(
-                                'assets/image/logo v2.png',
-                               width: 150,
-                              height: 150,
+                        
+                         Padding(
+                           padding: const EdgeInsets.all(15),
+                           child: Positioned(
+                            bottom: 0,
+                             child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: ConstAppColors.cardMainColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 10,
+                                    offset: Offset(0, 12),
+                                    color: const Color.fromARGB(141, 0, 0, 0))
+                                ]
+                              ),
+                               child: Image.asset(
+                                  'assets/image/logo v2.png',
+                                 width: 100,
+                                height: 100,
+                               ),
                              ),
                            ),
                          ),
-                         Transform.translate(
-                          offset: Offset(0, 30),
-                          child: Container(
-                            width: screenWidth,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                              BoxShadow(
-                                blurRadius: 10,
-                                color: Colors.black,
-                                offset: Offset(0, 5)
-                              )
-                            ],
-                              borderRadius: BorderRadius.circular(10),
-                               gradient: LinearGradient(colors:  [
-                                ConstAppColors.cardMainColor,
-                                ConstAppColors.cardBackColor
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight
-                              ),
-                            ),
-                            child: Transform.translate(
-                              offset: Offset(0, -5),
-                              child: Center(child: Text("اللغة العربية كما يجب أن تكون",
-                             style: GoogleFonts.blaka(
-                            color: ConstAppColors.backgroundDarkColor,
-                            fontSize: 40,
-                            ),),
-                              ),
-                            )),
-                        ),
+                         SizedBox(height: 5.5,),
+                         Positioned(
+                          bottom: 0,
+                           child: Container(
+                             width: screenWidth,
+                             height: 60,
+                             decoration: BoxDecoration(
+                               boxShadow: [
+                               BoxShadow(
+                                 blurRadius: 10,
+                                 color: Colors.black,
+                                 offset: Offset(0, 5)
+                               )
+                             ],
+                               borderRadius: BorderRadius.circular(5),
+                                gradient: LinearGradient(colors:  [
+                                 ConstAppColors.cardMainColor,
+                                 ConstAppColors.cardBackColor
+                               ],
+                               begin: Alignment.topLeft,
+                               end: Alignment.bottomRight
+                               ),
+                             ),
+                             child: Positioned(
+                               bottom: 0,
+                               child: Center(child: Text("اللغة العربية كما يجب أن تكون",
+                                                            style: GoogleFonts.blaka(
+                                                           color: ConstAppColors.backgroundDarkColor,
+                                                           fontSize: 40,
+                                                           ),),
+                               ),
+                             )),
+                         ),
                        
                       ],
                     ),
                     if (appParams.showTabs) 
-                      Transform.translate(
-                       offset: Offset(293, 0),
-                        child:  Container(
+                      Positioned(
+                        right: 0,
+                        child: Container(
                           width: 120,
                           height: 200,
                           decoration: BoxDecoration(
@@ -271,7 +306,6 @@ class SettingsPage extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   appParams.changeSelection("SET");
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SettingsPage()));
                                 },
                                 child: buildOption(
                                   Icons.settings,
@@ -288,7 +322,7 @@ class SettingsPage extends StatelessWidget {
                                 },
                                 child: buildOption(
                                   Icons.info_outline_rounded,
-                                  " البرنامج",
+                                  " معلومات",
                                   appParams.infoChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
                                   appParams.infoChosen ? Colors.white : ConstAppColors.cardMainColor,
                                 ),
@@ -297,7 +331,6 @@ class SettingsPage extends StatelessWidget {
                           ),
                         ),
                       ),
-              
                             ],
                           ),
                         );
