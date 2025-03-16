@@ -314,7 +314,7 @@ class MainPage extends StatelessWidget {
                                 },
                                 child: buildOption(
                                   Icons.info_outline_rounded,
-                                  " البرنامج",
+                                  " معلومات",
                                   appParams.infoChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
                                   appParams.infoChosen ? Colors.white : ConstAppColors.cardMainColor,
                                 ),

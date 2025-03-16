@@ -283,11 +283,10 @@ class InfoPage extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   appParams.changeSelection("INFO");
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => InfoPage()));
                                 },
                                 child: buildOption(
                                   Icons.info_outline_rounded,
-                                  " البرنامج",
+                                  " معلومات",
                                   appParams.infoChosen ? Colors.blueAccent : ConstAppColors.backgroundDarkColor,
                                   appParams.infoChosen ? Colors.white : ConstAppColors.cardMainColor,
                                 ),
