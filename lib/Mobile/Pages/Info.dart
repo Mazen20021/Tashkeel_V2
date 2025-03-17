@@ -81,7 +81,7 @@ class InfoPage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        const SizedBox(height: 35), 
+                        const SizedBox(height: 150), 
                          Container(
                           width: screenWidth ,
                           height: 250,
@@ -95,7 +95,7 @@ class InfoPage extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(5),
-                                    child: Text(" إعدادات التطبيق ", style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 30),),
+                                    child: Text("فريق العمل", style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 30),),
                                   ),
                                   Divider(color: ConstAppColors.backgroundDarkColor,thickness: 10,height: 10,),
                                  Padding(
@@ -103,20 +103,43 @@ class InfoPage extends StatelessWidget {
                                      child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                        children: [
+                                        SizedBox(height: 10,),
                                          Center(
-                                           child: Text("نظام الصوت" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 25),),
+                                           child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                             children: [
+                                               Text("م: مازن أحمد عبد الخالق" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 15),),
+                                               SizedBox(width: 25),
+                                               Text("م: عمر علاء الدين" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 15),),
+                                             ],
+                                           ),
+                                         ),
+                                         SizedBox(height: 10,),
+                                         Center(
+                                           child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                             children: [
+                                               Text("م: محمد صالح" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 15),),
+                                               SizedBox(width: 25),
+                                               Text("م: أحمد محمد الديري  " , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 15),),
+                                             ],
+                                           ),
                                          ),
                                        ],
                                      ),
                                    ),
-                                   Divider(color: ConstAppColors.backgroundDarkColor,thickness: 10,height: 50,),
+                                   Divider(color: ConstAppColors.backgroundDarkColor,thickness: 10,height: 10,),
                                    Padding(
                                      padding: const EdgeInsets.only(top: 0,bottom: 10),
                                      child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                        children: [
                                          Center(
-                                           child: Text("نظام الألوان" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 25),),
+                                           child: Text("عن التطبيق" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 25),),
+                                         ),
+                                         SizedBox(height: 10,),
+                                         Center(
+                                           child: Text("هذا التطبيق الإصدار 1.0 لتشكيل اللغة العربية " , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 15),),
                                          ),
                                        ],
                                      ),
@@ -125,86 +148,10 @@ class InfoPage extends StatelessWidget {
                               ),
                             )
                           ],)
-                        ),
-                        SizedBox(height: 20,),
-                        Container(
-                          width: screenWidth ,
-                          height: 250,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: ConstAppColors.cardMainColor,
-                          ),
-                          child: Column(children: [
-                            Center(
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(5),
-                                    child: Text(" بيانات المستخدم ", style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 30),),
-                                  ),
-                                  Divider(color: ConstAppColors.backgroundDarkColor,thickness: 10,height: 10,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Text("test1@test.com" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 20),),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Text(" : البريد الإليكتروني" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 20),),
-                                      ),
-                                  ],),
-                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      IconButton(onPressed: (){}, icon: Icon(Icons.change_circle_rounded , color: ConstAppColors.backgroundDarkColor , size: 30,)),
-                                      Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Text("0041212514" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 20),),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Text(" :  كلمـــــــة الســـــــر" , style: GoogleFonts.alexandria(color: ConstAppColors.backgroundDarkColor , fontSize: 20),),
-                                      ),
-                                  ],),
+                        ),         
 
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 19),
-                                    child: Center(
-                                      child:  GestureDetector(onTap: (){},
-                                    child: Container(
-                                    width: screenWidth,
-                                    height: 70,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) , bottomRight: Radius.circular(5)),
-                                      color: const Color.fromARGB(255, 170, 23, 12),
-                                    ),
-                                    child: Center(child: 
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                         Padding(
-                                           padding: const EdgeInsets.all(8.0),
-                                           child: Icon(Icons.remove_circle_rounded , color: Colors.white, size: 30,),
-                                         ),
-                                        Text("مسح الحساب" , style: GoogleFonts.alexandria(
-                                          color:Colors.white, fontSize: 25 , fontWeight: FontWeight.bold)),
-                                         
-                                      ],
-                                    )),
-                                                                    ),
-                                                                  ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],)
-                        ),
-                        
                          Padding(
-                           padding: const EdgeInsets.all(15),
+                           padding: const EdgeInsets.only(top: 150 , bottom: 10),
                            child: Positioned(
                             bottom: 0,
                              child: Container(
@@ -219,7 +166,7 @@ class InfoPage extends StatelessWidget {
                                 ]
                               ),
                                child: Image.asset(
-                                  'assets/image/logo v2.png',
+                                  'assets/image/logov2.png',
                                  width: 100,
                                 height: 100,
                                ),

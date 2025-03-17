@@ -218,7 +218,7 @@ class SettingsPage extends StatelessWidget {
                                 ]
                               ),
                                child: Image.asset(
-                                  'assets/image/logo v2.png',
+                                  'assets/image/logov2.png',
                                  width: 100,
                                 height: 100,
                                ),

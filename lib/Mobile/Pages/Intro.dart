@@ -102,7 +102,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                           ),
                         ),
                       ),
-                      Image.asset('assets/image/logo v2.png', width: 180, height: 180),
+                      Image.asset('assets/image/logov2.png', width: 180, height: 180),
                     ],
                   ),
                   const SizedBox(height: 20),

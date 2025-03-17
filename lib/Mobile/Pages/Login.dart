@@ -115,7 +115,7 @@ class LoginPage extends StatelessWidget {
                     child: Transform.translate(
                     offset: Offset(0, -375),
                     child: Image.asset(
-                        'assets/image/logo v2.png', // Replace with your logo asset path
+                        'assets/image/logov2.png', // Replace with your logo asset path
                         width: 120, // Adjust the width as needed
                         height: 120, // Adjust the height as needed
                       ),
